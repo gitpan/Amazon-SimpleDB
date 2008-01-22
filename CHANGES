@@ -1,0 +1,13 @@
+Revision history for Perl module Amazon::S3:
+
+0.41.2  Jan 20 2008
+    - Added documentation fixes that where causing 99-pod-coverage.t to fail.
+
+0.411   Jan 19 2008 
+    - initial release into CPAN
+    - Fork of Net::Amazon::S3 0.41
+    - Renamed packages
+    - Replaced XML::LibXML and XML::LibXML::XPathContext with XML::Simple
+    - Ran perltidy over code
+    - Removed deprecated methods from Amazon::S3
+    - Revised documentation and README
