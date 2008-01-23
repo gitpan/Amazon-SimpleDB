@@ -19,16 +19,18 @@ sub new {
     my $r = $args->{http_response};
     croak 'No HTTP::Response object in http_response'
       unless ref $r && $r->isa('HTTP::Response');
-    my $content;
+    my $tree;
     eval {
-        $content = XMLIn(
-                        $r->content,
-                        'ForceArray' => ['Attribute', 'DomainName', 'ItemName'],
-                        'KeepRoot'   => 1
-        );
+        my $content = $r->content;
+        $tree =
+          XMLin(
+                $content,
+                'ForceArray' => ['Attribute', 'DomainName', 'ItemName'],
+                'KeepRoot'   => 1
+          );
     };
     croak $@ if $@;
-    my ($type) = keys %$content;
+    my ($type) = keys %$tree;
     if ($r->is_error) {
         require Amazon::SimpleDB::ErrorResponse;
         $class = 'Amazon::SimpleDB::ErrorResponse';
@@ -38,13 +40,14 @@ sub new {
         croak $@ if $@;
     }
     my $self = bless {}, $class;
+    $self->{'account'}       = $args->{account};
     $self->{'http_response'} = $r;
-    $self->{'http_status'}   = $r->status;
-    $self->{'content'}       = $content;
+    $self->{'http_status'}   = $r->code;
+    $self->{'content'}       = $tree;
     $self->{'response_type'} = $type;
     if ($r->is_success) {    # errors are stored differently
-        $self->{'request_id'} = $content->{$type}{ResponseMetadata}{RequestId};
-        $self->{'box_usage'}  = $content->{$type}{ResponseMetadata}{BoxUsage};
+        $self->{'request_id'} = $tree->{$type}{ResponseMetadata}{RequestId};
+        $self->{'box_usage'}  = $tree->{$type}{ResponseMetadata}{BoxUsage};
     }
     return $self;
 }

@@ -2,7 +2,7 @@ package Amazon::SimpleDB;
 use strict;
 use warnings;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 use URI;
 use LWP::UserAgent;
@@ -13,7 +13,7 @@ use Carp qw( croak );
 use Amazon::SimpleDB::Domain;
 use Amazon::SimpleDB::Response;
 
-use constant SERVICE_URI          => 'https://sdb.amazonaws.com/';
+use constant SERVICE_URI          => 'http://sdb.amazonaws.com/';
 use constant KEEP_ALIVE_CACHESIZE => 10;
 
 sub new {
@@ -37,8 +37,14 @@ sub domains {
     my $params = {};
     $params->{MaxNumberOfDomains} = $args->{'limit'} if $args->{'limit'};
     $params->{NextToken}          = $args->{'next'}  if $args->{'next'};
-    return Amazon::SimpleDB::Response->new(
-                                        $self->request('ListDomains', $params));
+    my $res = $self->request('ListDomains', $params);
+    return
+      Amazon::SimpleDB::Response->new(
+                                      {
+                                       http_response => $res,
+                                       account       => $self
+                                      }
+      );
 }
 
 sub domain {
@@ -49,16 +55,24 @@ sub create_domain {    # note no more than 100 per account.
     my ($self, $name) = @_;
     my $res = $self->request('CreateDomain', {DomainName => $name});
     return
-      Amazon::SimpleDB::Response->new(http_response => $res,
-                                      account       => $self,);
+      Amazon::SimpleDB::Response->new(
+                                      {
+                                       http_response => $res,
+                                       account       => $self
+                                      }
+      );
 }
 
 sub delete_domain {
     my ($self, $name) = @_;
     my $res = $self->request('DeleteDomain', {DomainName => $name});
     return
-      Amazon::SimpleDB::Response->new(http_response => $res,
-                                      account       => $self,);
+      Amazon::SimpleDB::Response->new(
+                                      {
+                                       http_response => $res,
+                                       account       => $self
+                                      }
+      );
 }
 
 #--- utility methods

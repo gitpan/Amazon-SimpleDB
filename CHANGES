@@ -1,13 +1,9 @@
-Revision history for Perl module Amazon::S3:
+Revision history for Perl module Amazon::SimpleDB:
 
-0.41.2  Jan 20 2008
-    - Added documentation fixes that where causing 99-pod-coverage.t to fail.
+0.02   Jan 23 2008 
+    - added 10-domain.t and fixed a bunch of things that uncovered.
 
-0.411   Jan 19 2008 
+0.01   Jan 22 2008 
+    - it compiles
     - initial release into CPAN
-    - Fork of Net::Amazon::S3 0.41
-    - Renamed packages
-    - Replaced XML::LibXML and XML::LibXML::XPathContext with XML::Simple
-    - Ran perltidy over code
-    - Removed deprecated methods from Amazon::S3
-    - Revised documentation and README
+
