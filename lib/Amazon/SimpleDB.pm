@@ -2,7 +2,7 @@ package Amazon::SimpleDB;
 use strict;
 use warnings;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 use URI;
 use LWP::UserAgent;
@@ -121,8 +121,8 @@ __END__
 
 =head1 NAME
 
-Amazon::S3 - a "low-level" perlish interface for
-working with Amazon's SimpleDB (SDB) service.
+Amazon::SimpleDB - a low-level perlish interface for
+working with Amazon's SimpleDB service.
 
 =head1 DESCRIPTION
 

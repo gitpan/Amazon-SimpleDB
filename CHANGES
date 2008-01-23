@@ -1,5 +1,8 @@
 Revision history for Perl module Amazon::SimpleDB:
 
+0.03   Jan 23 2008
+    - Fixed botched PODs.
+    
 0.02   Jan 23 2008 
     - added 10-domain.t and fixed a bunch of things that uncovered.
 

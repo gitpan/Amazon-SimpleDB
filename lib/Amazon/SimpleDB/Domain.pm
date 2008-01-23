@@ -42,7 +42,7 @@ __END__
 
 =head1 NAME
 
-Amazon::SimpleBD::Domain - A class representing a domain in SimpleDB
+Amazon::SimpleDB::Domain - a class representing a domain in SimpleDB
 
 =head1 DESCRIPTION
 

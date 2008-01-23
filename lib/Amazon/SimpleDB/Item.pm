@@ -106,7 +106,7 @@ __END__
 
 =head1 NAME
 
-Amazon::SimpleBD::Domain - A class representing a domain in SimpleDB
+Amazon::SimpleBD::Item - A class representing a domain in SimpleDB
 
 =head1 DESCRIPTION
 
@@ -115,7 +115,7 @@ consider it stable. Feedback and patches welcome.>
 
 =head1 METHODS
 
-=head2 Amazon::SimpleDB::Domain->new($args)
+=head2 Amazon::SimpleDB::Item->new($args)
 
 Constructor for a domain. Takes a required HASHREF with three required keys:
 
